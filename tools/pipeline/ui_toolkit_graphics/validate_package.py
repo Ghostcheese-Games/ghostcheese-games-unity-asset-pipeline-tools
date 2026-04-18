@@ -352,7 +352,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     if sys.version_info < (3, 10):
-        print("Validation failed: tools/pipeline/ui_toolkit_graphics/validate_package.py requires Python 3.10+.")
+        print("Validation failed: Python 3.10+ is required.")
         return 1
 
     args = parse_args()

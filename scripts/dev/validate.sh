@@ -65,7 +65,7 @@ while IFS= read -r -d '' script; do
 done < <(find scripts -type f -name "*.sh" -print0)
 
 if ! command -v python3 >/dev/null 2>&1; then
-  echo "python3 is required to run integration validation. Install Python 3.10+ and retry." >&2
+  echo "python3 command not found. Install Python 3.10+ and retry." >&2
   exit 1
 fi
 
