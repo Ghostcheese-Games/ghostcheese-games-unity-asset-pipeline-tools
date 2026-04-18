@@ -260,7 +260,7 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     family = pipeline.get("family")
     if family is not None and family not in allowed_families:
         errors.append(f"pipeline.family must be one of: {', '.join(allowed_families)}.")
-    if family != "ui-toolkit-graphics":
+    if _require_non_empty_string(family) and family != "ui-toolkit-graphics":
         errors.append(f"pipeline.family must be 'ui-toolkit-graphics' for this validator, got {family!r}.")
 
     family_schema_version = pipeline.get("familySchemaVersion")
@@ -359,15 +359,18 @@ def main() -> int:
     package_root = Path(args.package_root).resolve()
 
     if not package_root.is_dir():
-        print(f"Validation failed: package root does not exist or is not a directory: {package_root}")
+        print(
+            f"Validation failed: package root does not exist or is not a directory: {package_root}",
+            file=sys.stderr,
+        )
         return 1
 
     errors, info = validate_package(package_root=package_root, manifest_name=args.manifest_name)
 
     if errors:
-        print(f"Validation failed for package: {package_root}")
+        print(f"Validation failed for package: {package_root}", file=sys.stderr)
         for error in errors:
-            print(f"- ERROR: {error}")
+            print(f"- ERROR: {error}", file=sys.stderr)
         return 1
 
     print(f"Validation passed for package: {package_root}")
