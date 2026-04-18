@@ -50,6 +50,13 @@
       "manifestName": "",
       "expectValid": false,
       "expectedOutputContains": "manifest-name must be a non-empty string."
+    },
+    {
+      "name": "invalid-manifest-name-windows-separator-traversal",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/valid/minimal-package",
+      "manifestName": "..\\\\manifest.json",
+      "expectValid": false,
+      "expectedOutputContains": "manifest-name must be a safe relative path"
     }
   ]
 }

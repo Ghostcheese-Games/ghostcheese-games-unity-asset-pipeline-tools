@@ -24,6 +24,7 @@ def _is_safe_relative_path(path: str) -> bool:
     candidate = Path(path)
     return (
         path != ""
+        and "\\" not in path
         and not candidate.is_absolute()
         and ".." not in candidate.parts
         and "~" not in path
