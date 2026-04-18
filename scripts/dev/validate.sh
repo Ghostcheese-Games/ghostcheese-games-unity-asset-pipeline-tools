@@ -70,7 +70,7 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 
 if ! python3 -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 10) else 1)'; then
-  echo "python3 3.10+ is required to run integration validation. Current version: $(python3 -V 2>&1)." >&2
+  echo "Python 3.10+ is required to run integration validation. Current version: $(python3 -V 2>&1)." >&2
   exit 1
 fi
 
