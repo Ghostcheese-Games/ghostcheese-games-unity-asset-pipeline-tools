@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temp artifacts
+*.log
+tmp/
+temp/
+
+# Common build artifacts
+build/
+dist/
+out/
+coverage/
