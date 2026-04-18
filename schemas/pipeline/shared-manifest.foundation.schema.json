@@ -26,6 +26,10 @@
     }
   },
   "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+    },
     "commonManifest": {
       "type": "object",
       "additionalProperties": false,
@@ -38,8 +42,7 @@
       ],
       "properties": {
         "manifestId": {
-          "type": "string",
-          "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+          "$ref": "#/$defs/identifier"
         },
         "displayName": {
           "type": "string",
@@ -132,8 +135,7 @@
       ],
       "properties": {
         "assetId": {
-          "type": "string",
-          "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+          "$ref": "#/$defs/identifier"
         },
         "path": {
           "type": "string",
