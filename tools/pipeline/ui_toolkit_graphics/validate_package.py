@@ -26,12 +26,26 @@ def _is_safe_relative_path(path: str) -> bool:
         path != ""
         and not candidate.is_absolute()
         and ".." not in candidate.parts
-        and "~" not in candidate.parts
+        and "~" not in path
     )
 
 
 def _require_non_empty_string(value: Any) -> bool:
     return isinstance(value, str) and value.strip() != ""
+
+
+def _path_stays_within_package_root(package_root: Path, relative_path: str) -> bool:
+    try:
+        resolved_root = package_root.resolve()
+        resolved_candidate = (package_root / relative_path).resolve()
+    except OSError:
+        return False
+
+    try:
+        resolved_candidate.relative_to(resolved_root)
+    except ValueError:
+        return False
+    return True
 
 
 def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str], list[str]]:
@@ -40,7 +54,14 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
 
     repo_root = Path(__file__).resolve().parents[3]
     schema_path = repo_root / "schemas" / "pipeline" / "shared-manifest.foundation.schema.json"
-    schema = _load_json(schema_path)
+    try:
+        schema = _load_json(schema_path)
+    except OSError as exc:
+        errors.append(f"Shared foundation schema could not be read: {schema_path} ({exc})")
+        return errors, info
+    except json.JSONDecodeError as exc:
+        errors.append(f"Shared foundation schema is not valid JSON: {schema_path} ({exc})")
+        return errors, info
 
     manifest_path = package_root / manifest_name
     if not manifest_path.is_file():
@@ -100,9 +121,9 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     if not isinstance(source, dict):
         errors.append("common.source must be an object.")
         source = {}
-    if source and not _require_non_empty_string(source.get("repository")):
+    if not _require_non_empty_string(source.get("repository")):
         errors.append("common.source.repository must be a non-empty string.")
-    if source and not _require_non_empty_string(source.get("relativeRoot")):
+    if not _require_non_empty_string(source.get("relativeRoot")):
         errors.append("common.source.relativeRoot must be a non-empty string.")
 
     assets = common.get("assets")
@@ -130,6 +151,10 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
                 errors.append(f"common.assets[{idx}].path must be a non-empty string.")
             elif not _is_safe_relative_path(asset_path):
                 errors.append(f"common.assets[{idx}].path must be a safe relative path: {asset_path!r}.")
+            elif not _path_stays_within_package_root(package_root, asset_path):
+                errors.append(
+                    f"common.assets[{idx}].path resolves outside package root or is unreadable: {asset_path!r}."
+                )
             else:
                 asset_paths.add(asset_path)
                 if not (package_root / asset_path).is_file():
@@ -181,6 +206,11 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
         if not _is_safe_relative_path(path):
             errors.append(f"pipeline.payload.visualTreeAssets[{idx}] must be a safe relative path: {path!r}.")
             continue
+        if not _path_stays_within_package_root(package_root, path):
+            errors.append(
+                f"pipeline.payload.visualTreeAssets[{idx}] resolves outside package root or is unreadable: {path!r}."
+            )
+            continue
         if not path.endswith(".uxml"):
             errors.append(f"pipeline.payload.visualTreeAssets[{idx}] must end with .uxml: {path!r}.")
         if path not in asset_paths:
@@ -199,6 +229,11 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
                 continue
             if not _is_safe_relative_path(path):
                 errors.append(f"pipeline.payload.styleSheets[{idx}] must be a safe relative path: {path!r}.")
+                continue
+            if not _path_stays_within_package_root(package_root, path):
+                errors.append(
+                    f"pipeline.payload.styleSheets[{idx}] resolves outside package root or is unreadable: {path!r}."
+                )
                 continue
             if not path.endswith(".uss"):
                 errors.append(f"pipeline.payload.styleSheets[{idx}] must end with .uss: {path!r}.")

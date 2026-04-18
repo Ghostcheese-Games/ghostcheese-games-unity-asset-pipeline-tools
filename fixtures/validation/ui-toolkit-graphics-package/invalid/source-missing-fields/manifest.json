@@ -1,0 +1,26 @@
+{
+  "manifestSchemaVersion": "1.0.0",
+  "manifestKind": "gcg.asset-pipeline.manifest",
+  "common": {
+    "manifestId": "fixture.ui-toolkit.package.source-missing.v1",
+    "displayName": "Fixture UI Toolkit Package Source Missing",
+    "governanceScope": "shared-cross-game",
+    "source": {},
+    "assets": [
+      {
+        "assetId": "main-menu-layout",
+        "path": "Layout/MainMenu.uxml",
+        "kind": "ui-layout"
+      }
+    ]
+  },
+  "pipeline": {
+    "family": "ui-toolkit-graphics",
+    "familySchemaVersion": "1.0.0",
+    "payload": {
+      "visualTreeAssets": [
+        "Layout/MainMenu.uxml"
+      ]
+    }
+  }
+}

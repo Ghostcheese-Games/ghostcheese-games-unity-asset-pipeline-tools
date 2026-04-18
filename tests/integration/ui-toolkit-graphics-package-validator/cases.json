@@ -18,6 +18,24 @@
       "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/wrong-family",
       "expectValid": false,
       "expectedOutputContains": "pipeline.family must be 'ui-toolkit-graphics'"
+    },
+    {
+      "name": "invalid-source-missing-fields",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/source-missing-fields",
+      "expectValid": false,
+      "expectedOutputContains": "common.source.repository must be a non-empty string."
+    },
+    {
+      "name": "invalid-tilde-in-path",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/tilde-in-path",
+      "expectValid": false,
+      "expectedOutputContains": "must be a safe relative path"
+    },
+    {
+      "name": "invalid-symlink-escape",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/symlink-escape/package",
+      "expectValid": false,
+      "expectedOutputContains": "resolves outside package root"
     }
   ]
 }
