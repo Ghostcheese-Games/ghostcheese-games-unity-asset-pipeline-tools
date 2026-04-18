@@ -34,18 +34,18 @@ def _require_non_empty_string(value: Any) -> bool:
     return isinstance(value, str) and value.strip() != ""
 
 
-def _path_stays_within_package_root(package_root: Path, relative_path: str) -> bool:
+def _path_stays_within_package_root(package_root: Path, relative_path: str) -> tuple[bool, str | None]:
     try:
         resolved_root = package_root.resolve()
         resolved_candidate = (package_root / relative_path).resolve()
-    except OSError:
-        return False
+    except (OSError, RuntimeError):
+        return False, "could not be resolved"
 
     try:
         resolved_candidate.relative_to(resolved_root)
     except ValueError:
-        return False
-    return True
+        return False, "resolves outside package root"
+    return True, None
 
 
 def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str], list[str]]:
@@ -154,11 +154,11 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
             elif not _is_safe_relative_path(asset_path):
                 errors.append(f"common.assets[{idx}].path must be a safe relative path: {asset_path!r}.")
                 path_is_valid = False
-            elif not _path_stays_within_package_root(package_root, asset_path):
-                errors.append(
-                    f"common.assets[{idx}].path resolves outside package root or is unreadable: {asset_path!r}."
-                )
-                path_is_valid = False
+            else:
+                within_root, reason = _path_stays_within_package_root(package_root, asset_path)
+                if not within_root:
+                    errors.append(f"common.assets[{idx}].path {reason}: {asset_path!r}.")
+                    path_is_valid = False
 
             if path_is_valid:
                 asset_paths.add(asset_path)
@@ -211,10 +211,9 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
         if not _is_safe_relative_path(path):
             errors.append(f"pipeline.payload.visualTreeAssets[{idx}] must be a safe relative path: {path!r}.")
             continue
-        if not _path_stays_within_package_root(package_root, path):
-            errors.append(
-                f"pipeline.payload.visualTreeAssets[{idx}] resolves outside package root or is unreadable: {path!r}."
-            )
+        within_root, reason = _path_stays_within_package_root(package_root, path)
+        if not within_root:
+            errors.append(f"pipeline.payload.visualTreeAssets[{idx}] {reason}: {path!r}.")
             continue
         if not path.endswith(".uxml"):
             errors.append(f"pipeline.payload.visualTreeAssets[{idx}] must end with .uxml: {path!r}.")
@@ -235,10 +234,9 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
             if not _is_safe_relative_path(path):
                 errors.append(f"pipeline.payload.styleSheets[{idx}] must be a safe relative path: {path!r}.")
                 continue
-            if not _path_stays_within_package_root(package_root, path):
-                errors.append(
-                    f"pipeline.payload.styleSheets[{idx}] resolves outside package root or is unreadable: {path!r}."
-                )
+            within_root, reason = _path_stays_within_package_root(package_root, path)
+            if not within_root:
+                errors.append(f"pipeline.payload.styleSheets[{idx}] {reason}: {path!r}.")
                 continue
             if not path.endswith(".uss"):
                 errors.append(f"pipeline.payload.styleSheets[{idx}] must end with .uss: {path!r}.")
