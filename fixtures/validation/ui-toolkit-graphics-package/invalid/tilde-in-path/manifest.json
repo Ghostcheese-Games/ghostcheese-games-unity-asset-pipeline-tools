@@ -1,0 +1,29 @@
+{
+  "manifestSchemaVersion": "1.0.0",
+  "manifestKind": "gcg.asset-pipeline.manifest",
+  "common": {
+    "manifestId": "fixture.ui-toolkit.package.tilde-path.v1",
+    "displayName": "Fixture UI Toolkit Package Tilde Path",
+    "governanceScope": "shared-cross-game",
+    "source": {
+      "repository": "Ghostcheese-Games/example",
+      "relativeRoot": "Assets/UI/MainMenu"
+    },
+    "assets": [
+      {
+        "assetId": "main-menu-layout",
+        "path": "Layout/Main~Menu.uxml",
+        "kind": "ui-layout"
+      }
+    ]
+  },
+  "pipeline": {
+    "family": "ui-toolkit-graphics",
+    "familySchemaVersion": "1.0.0",
+    "payload": {
+      "visualTreeAssets": [
+        "Layout/Main~Menu.uxml"
+      ]
+    }
+  }
+}

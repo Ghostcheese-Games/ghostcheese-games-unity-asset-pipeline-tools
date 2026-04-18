@@ -6,7 +6,7 @@ This repository is the central home for cross-game asset-pipeline tooling infras
 
 ## Repository status
 
-Bootstrap scaffold complete; implementation work can now begin.
+Bootstrap scaffold complete, with the first production validator slice implemented; broader implementation work continues.
 
 ## Governance alignment
 
@@ -85,6 +85,29 @@ The initial shared manifest/schema foundation is defined for cross-pipeline tool
 - examples: `examples/pipeline-packages/shared-manifest.*.example.json`
 - validation fixtures: `fixtures/validation/shared-manifest/`
 
+## First real tool slice: UI Toolkit graphics package validator
+
+This repository now includes a first end-to-end validator slice for Unity UI Toolkit graphic asset packages:
+
+- validator entrypoint: `tools/pipeline/ui_toolkit_graphics/validate_package.py`
+- integration test matrix: `tests/integration/ui-toolkit-graphics-package-validator/cases.json`
+- package fixtures: `fixtures/validation/ui-toolkit-graphics-package/`
+
+Python requirement: Python 3.10+.
+
+Run directly:
+
+```bash
+python3 tools/pipeline/ui_toolkit_graphics/validate_package.py \
+  --package-root fixtures/validation/ui-toolkit-graphics-package/valid/minimal-package
+```
+
+Run repository validation (includes validator integration tests):
+
+```bash
+bash scripts/dev/validate.sh
+```
+
 This foundation separates strict `common` shared manifest concepts from `pipeline` extension payloads so future family-specific validators can evolve independently.
 
 ## Development notes
@@ -93,8 +116,8 @@ This scaffold is implementation-agnostic so the repo can host tooling in differe
 
 Current state:
 
-- no production tooling implementation yet
-- no language-specific build/test stack configured yet
+- first production tooling implementation exists (UI Toolkit graphics package validator)
+- no additional language-specific build/test stack configured yet beyond Python-based validator integration
 
 ## Validation baseline
 
@@ -112,6 +135,7 @@ Current baseline checks:
 - required area `README.md` files exist
 - markdown files are non-empty and start with a heading
 - shell scripts under `scripts/` are syntax-checked with `bash -n`
+- UI Toolkit graphics package validator integration matrix runs via `python3` (Python 3.10+)
 
 CI:
 

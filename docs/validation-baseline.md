@@ -15,6 +15,7 @@ The script validates:
 - required scaffold paths and area README files
 - markdown file sanity (non-empty and heading-first)
 - shell script syntax under `scripts/`
+- UI Toolkit graphics package validator integration cases
 
 ## CI validation
 
