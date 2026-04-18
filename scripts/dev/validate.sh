@@ -64,6 +64,16 @@ while IFS= read -r -d '' script; do
   bash -n "${script}"
 done < <(find scripts -type f -name "*.sh" -print0)
 
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "python3 is required to run integration validation. Install Python 3.10+ and retry." >&2
+  exit 1
+fi
+
+if ! python3 -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 10) else 1)'; then
+  echo "python3 3.10+ is required to run integration validation. Current version: $(python3 -V 2>&1)." >&2
+  exit 1
+fi
+
 python3 tests/integration/ui-toolkit-graphics-package-validator/test_validator.py
 
 echo "Validation passed."
