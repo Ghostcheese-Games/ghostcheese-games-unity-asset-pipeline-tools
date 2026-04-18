@@ -147,15 +147,20 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
 
         asset_path = asset.get("path")
         if asset_path is not None:
+            path_is_valid = True
             if not _require_non_empty_string(asset_path):
                 errors.append(f"common.assets[{idx}].path must be a non-empty string.")
+                path_is_valid = False
             elif not _is_safe_relative_path(asset_path):
                 errors.append(f"common.assets[{idx}].path must be a safe relative path: {asset_path!r}.")
+                path_is_valid = False
             elif not _path_stays_within_package_root(package_root, asset_path):
                 errors.append(
                     f"common.assets[{idx}].path resolves outside package root or is unreadable: {asset_path!r}."
                 )
-            else:
+                path_is_valid = False
+
+            if path_is_valid:
                 asset_paths.add(asset_path)
                 if not (package_root / asset_path).is_file():
                     errors.append(f"Asset file listed in common.assets is missing: {asset_path}")
