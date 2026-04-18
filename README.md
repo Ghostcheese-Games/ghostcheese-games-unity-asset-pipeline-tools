@@ -85,4 +85,27 @@ Current state:
 - no production tooling implementation yet
 - no language-specific build/test stack configured yet
 
-When adding tooling, document setup and commands in this README and add matching CI checks.
+## Validation baseline
+
+This repo includes a lightweight validation baseline that is intentionally implementation-agnostic.
+
+Run locally:
+
+```bash
+bash scripts/dev/validate.sh
+```
+
+Current baseline checks:
+
+- expected scaffold directories/files are present
+- required area `README.md` files exist
+- markdown files are non-empty and start with a heading
+- shell scripts under `scripts/` are syntax-checked with `bash -n`
+
+CI:
+
+- GitHub Actions workflow: `.github/workflows/validation-baseline.yml`
+- runs on pull requests and pushes to `main`
+- executes the same local baseline script
+
+Future tool-specific validation should plug in by extending `scripts/dev/validate.sh` and, if needed, adding toolchain-specific jobs/workflows while keeping this baseline as the common floor.
