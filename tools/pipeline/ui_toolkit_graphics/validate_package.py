@@ -181,6 +181,8 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     )
     if not _require_non_empty_string(source.get("repository")):
         errors.append("common.source.repository must be a non-empty string.")
+    if "revision" in source and not _require_non_empty_string(source.get("revision")):
+        errors.append("common.source.revision must be a non-empty string when present.")
     if not _require_non_empty_string(source.get("relativeRoot")):
         errors.append("common.source.relativeRoot must be a non-empty string.")
 

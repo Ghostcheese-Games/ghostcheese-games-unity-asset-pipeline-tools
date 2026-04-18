@@ -32,6 +32,12 @@
       "expectedOutputContains": "common.source.repository must be a non-empty string."
     },
     {
+      "name": "invalid-source-empty-revision",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/source-empty-revision",
+      "expectValid": false,
+      "expectedOutputContains": "common.source.revision must be a non-empty string when present."
+    },
+    {
       "name": "invalid-tilde-in-path",
       "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/tilde-in-path",
       "expectValid": false,
