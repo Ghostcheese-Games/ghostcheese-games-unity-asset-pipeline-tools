@@ -36,6 +36,13 @@
       "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/symlink-escape/package",
       "expectValid": false,
       "expectedOutputContains": "resolves outside package root"
+    },
+    {
+      "name": "invalid-manifest-name-path-traversal",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/valid/minimal-package",
+      "manifestName": "../manifest.json",
+      "expectValid": false,
+      "expectedOutputContains": "manifest-name must be a file name without path separators."
     }
   ]
 }

@@ -63,6 +63,21 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
         errors.append(f"Shared foundation schema is not valid JSON: {schema_path} ({exc})")
         return errors, info
 
+    if not _require_non_empty_string(manifest_name):
+        errors.append("manifest-name must be a non-empty string.")
+        return errors, info
+    if Path(manifest_name).name != manifest_name:
+        errors.append("manifest-name must be a file name without path separators.")
+        return errors, info
+    if not _is_safe_relative_path(manifest_name):
+        errors.append(f"manifest-name must be a safe relative path: {manifest_name!r}.")
+        return errors, info
+
+    within_root, reason = _path_stays_within_package_root(package_root, manifest_name)
+    if not within_root:
+        errors.append(f"manifest-name {reason}: {manifest_name!r}.")
+        return errors, info
+
     manifest_path = package_root / manifest_name
     if not manifest_path.is_file():
         errors.append(f"Missing manifest file: {manifest_path}")
@@ -70,6 +85,9 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
 
     try:
         manifest = _load_json(manifest_path)
+    except OSError as exc:
+        errors.append(f"Manifest could not be read: {manifest_path} ({exc})")
+        return errors, info
     except json.JSONDecodeError as exc:
         errors.append(f"Manifest is not valid JSON: {manifest_path} ({exc})")
         return errors, info

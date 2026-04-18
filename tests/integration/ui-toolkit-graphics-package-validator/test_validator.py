@@ -21,8 +21,12 @@ def main() -> int:
     failures: list[str] = []
     for case in cases:
         package_root = repo_root / case["packageRoot"]
+        command = [sys.executable, str(validator), "--package-root", str(package_root)]
+        manifest_name = case.get("manifestName")
+        if manifest_name is not None:
+            command.extend(["--manifest-name", manifest_name])
         result = subprocess.run(
-            [sys.executable, str(validator), "--package-root", str(package_root)],
+            command,
             cwd=repo_root,
             check=False,
             capture_output=True,
