@@ -8,6 +8,12 @@
       "expectedOutputContains": "Validation passed"
     },
     {
+      "name": "valid-dot-path-equivalence",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/valid/dot-path-equivalence",
+      "expectValid": true,
+      "expectedOutputContains": "Validation passed"
+    },
+    {
       "name": "invalid-missing-visual-tree-file",
       "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/missing-visual-tree-file",
       "expectValid": false,
@@ -57,6 +63,18 @@
       "manifestName": "..\\\\manifest.json",
       "expectValid": false,
       "expectedOutputContains": "manifest-name must be a safe relative path"
+    },
+    {
+      "name": "invalid-display-name-too-long",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/display-name-too-long",
+      "expectValid": false,
+      "expectedOutputContains": "common.displayName must be at most 200 characters."
+    },
+    {
+      "name": "invalid-unexpected-common-field",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/unexpected-common-field",
+      "expectValid": false,
+      "expectedOutputContains": "common contains unsupported field: unsupportedField."
     }
   ]
 }

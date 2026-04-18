@@ -19,8 +19,14 @@ def main() -> int:
     cases = spec["cases"]
 
     failures: list[str] = []
+    skipped: list[str] = []
     for case in cases:
         package_root = repo_root / case["packageRoot"]
+        if case["name"] == "invalid-symlink-escape":
+            symlink_path = package_root / "Linked"
+            if not symlink_path.is_symlink():
+                skipped.append(f"{case['name']}: skipped because {symlink_path} is not a symlink on this platform.")
+                continue
         command = [sys.executable, str(validator), "--package-root", str(package_root)]
         manifest_name = case.get("manifestName")
         if manifest_name is not None:
@@ -50,9 +56,18 @@ def main() -> int:
         print("UI Toolkit graphics package validator integration tests failed:")
         for failure in failures:
             print(f"- {failure}")
+        if skipped:
+            print("Skipped cases:")
+            for skip in skipped:
+                print(f"- {skip}")
         return 1
 
-    print(f"UI Toolkit graphics package validator integration tests passed ({len(cases)} cases).")
+    executed_count = len(cases) - len(skipped)
+    print(f"UI Toolkit graphics package validator integration tests passed ({executed_count}/{len(cases)} cases).")
+    if skipped:
+        print("Skipped cases:")
+        for skip in skipped:
+            print(f"- {skip}")
     return 0
 
 

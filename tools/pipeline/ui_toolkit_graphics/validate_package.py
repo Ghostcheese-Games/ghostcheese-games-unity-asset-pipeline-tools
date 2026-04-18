@@ -35,6 +35,18 @@ def _require_non_empty_string(value: Any) -> bool:
     return isinstance(value, str) and value.strip() != ""
 
 
+def _normalize_relative_path(path: str) -> str:
+    return Path(path).as_posix()
+
+
+def _validate_additional_properties(
+    data: dict[str, Any], allowed_fields: set[str], field_label: str, errors: list[str]
+) -> None:
+    for key in data:
+        if key not in allowed_fields:
+            errors.append(f"{field_label} contains unsupported field: {key}.")
+
+
 def _path_stays_within_package_root(package_root: Path, relative_path: str) -> tuple[bool, str | None]:
     try:
         resolved_root = package_root.resolve()
@@ -101,6 +113,12 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     for field in top_required:
         if field not in manifest:
             errors.append(f"Missing required top-level field: {field}")
+    _validate_additional_properties(
+        manifest,
+        set(schema.get("properties", {}).keys()),
+        "manifest",
+        errors,
+    )
 
     expected_schema_version = schema.get("properties", {}).get("manifestSchemaVersion", {}).get("const")
     if manifest.get("manifestSchemaVersion") != expected_schema_version:
@@ -116,8 +134,15 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     if not isinstance(common, dict):
         errors.append("common must be an object.")
         common = {}
+    common_schema = schema.get("$defs", {}).get("commonManifest", {})
+    _validate_additional_properties(
+        common,
+        set(common_schema.get("properties", {}).keys()),
+        "common",
+        errors,
+    )
 
-    common_required = schema.get("$defs", {}).get("commonManifest", {}).get("required", [])
+    common_required = common_schema.get("required", [])
     for field in common_required:
         if field not in common:
             errors.append(f"common.{field} is required.")
@@ -128,11 +153,18 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
 
     if "displayName" in common and not _require_non_empty_string(common.get("displayName")):
         errors.append("common.displayName must be a non-empty string.")
+    common_display_name_schema = common_schema.get("properties", {}).get("displayName", {})
+    common_display_name = common.get("displayName")
+    max_display_name_length = common_display_name_schema.get("maxLength")
+    if (
+        isinstance(common_display_name, str)
+        and isinstance(max_display_name_length, int)
+        and len(common_display_name) > max_display_name_length
+    ):
+        errors.append(f"common.displayName must be at most {max_display_name_length} characters.")
 
     scope = common.get("governanceScope")
-    allowed_scopes = schema.get("$defs", {}).get("commonManifest", {}).get("properties", {}).get("governanceScope", {}).get(
-        "enum", []
-    )
+    allowed_scopes = common_schema.get("properties", {}).get("governanceScope", {}).get("enum", [])
     if scope is not None and scope not in allowed_scopes:
         errors.append(f"common.governanceScope must be one of: {', '.join(allowed_scopes)}.")
 
@@ -140,6 +172,13 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     if not isinstance(source, dict):
         errors.append("common.source must be an object.")
         source = {}
+    source_schema = common_schema.get("properties", {}).get("source", {})
+    _validate_additional_properties(
+        source,
+        set(source_schema.get("properties", {}).keys()),
+        "common.source",
+        errors,
+    )
     if not _require_non_empty_string(source.get("repository")):
         errors.append("common.source.repository must be a non-empty string.")
     if not _require_non_empty_string(source.get("relativeRoot")):
@@ -155,6 +194,15 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
         if not isinstance(asset, dict):
             errors.append(f"common.assets[{idx}] must be an object.")
             continue
+        asset_schema = common_schema.get("properties", {}).get("assets", {}).get("items", {}).get("$ref")
+        asset_schema_name = asset_schema.removeprefix("#/$defs/") if isinstance(asset_schema, str) else None
+        asset_entry_schema = schema.get("$defs", {}).get(asset_schema_name or "", {})
+        _validate_additional_properties(
+            asset,
+            set(asset_entry_schema.get("properties", {}).keys()),
+            f"common.assets[{idx}]",
+            errors,
+        )
 
         for required in ("assetId", "path", "kind"):
             if required not in asset:
@@ -180,8 +228,9 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
                     path_is_valid = False
 
             if path_is_valid:
-                asset_paths.add(asset_path)
-                if not (package_root / asset_path).is_file():
+                normalized_asset_path = _normalize_relative_path(asset_path)
+                asset_paths.add(normalized_asset_path)
+                if not (package_root / normalized_asset_path).is_file():
                     errors.append(f"Asset file listed in common.assets is missing: {asset_path}")
 
         kind = asset.get("kind")
@@ -192,15 +241,20 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     if not isinstance(pipeline, dict):
         errors.append("pipeline must be an object.")
         pipeline = {}
+    pipeline_schema = schema.get("$defs", {}).get("pipelineExtensionPoint", {})
+    _validate_additional_properties(
+        pipeline,
+        set(pipeline_schema.get("properties", {}).keys()),
+        "pipeline",
+        errors,
+    )
 
-    pipeline_required = schema.get("$defs", {}).get("pipelineExtensionPoint", {}).get("required", [])
+    pipeline_required = pipeline_schema.get("required", [])
     for field in pipeline_required:
         if field not in pipeline:
             errors.append(f"pipeline.{field} is required.")
 
-    allowed_families = schema.get("$defs", {}).get("pipelineExtensionPoint", {}).get("properties", {}).get("family", {}).get(
-        "enum", []
-    )
+    allowed_families = pipeline_schema.get("properties", {}).get("family", {}).get("enum", [])
     family = pipeline.get("family")
     if family is not None and family not in allowed_families:
         errors.append(f"pipeline.family must be one of: {', '.join(allowed_families)}.")
@@ -236,9 +290,10 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
             continue
         if not path.endswith(".uxml"):
             errors.append(f"pipeline.payload.visualTreeAssets[{idx}] must end with .uxml: {path!r}.")
-        if path not in asset_paths:
+        normalized_path = _normalize_relative_path(path)
+        if normalized_path not in asset_paths:
             errors.append(f"pipeline.payload.visualTreeAssets[{idx}] must also be listed in common.assets: {path}")
-        if not (package_root / path).is_file():
+        if not (package_root / normalized_path).is_file():
             errors.append(f"pipeline.payload.visualTreeAssets[{idx}] file is missing: {path}")
 
     style_sheets = payload.get("styleSheets")
@@ -259,9 +314,10 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
                 continue
             if not path.endswith(".uss"):
                 errors.append(f"pipeline.payload.styleSheets[{idx}] must end with .uss: {path!r}.")
-            if path not in asset_paths:
+            normalized_path = _normalize_relative_path(path)
+            if normalized_path not in asset_paths:
                 errors.append(f"pipeline.payload.styleSheets[{idx}] must also be listed in common.assets: {path}")
-            if not (package_root / path).is_file():
+            if not (package_root / normalized_path).is_file():
                 errors.append(f"pipeline.payload.styleSheets[{idx}] file is missing: {path}")
 
     if not errors:
