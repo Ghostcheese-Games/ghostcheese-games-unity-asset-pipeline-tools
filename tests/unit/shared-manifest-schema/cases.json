@@ -10,13 +10,20 @@
       "name": "invalid-missing-common-manifest-id",
       "fixture": "fixtures/validation/shared-manifest/invalid/missing-common.manifest-id.json",
       "expectValid": false,
-      "expectedFailureContains": "manifestId"
+      "expectedFailure": {
+        "instancePath": "/common",
+        "keyword": "required",
+        "missingProperty": "manifestId"
+      }
     },
     {
       "name": "invalid-unknown-pipeline-family",
       "fixture": "fixtures/validation/shared-manifest/invalid/unknown-family.json",
       "expectValid": false,
-      "expectedFailureContains": "family"
+      "expectedFailure": {
+        "instancePath": "/pipeline/family",
+        "keyword": "enum"
+      }
     }
   ]
 }
