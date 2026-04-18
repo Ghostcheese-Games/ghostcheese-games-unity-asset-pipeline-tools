@@ -54,7 +54,7 @@ for file in "${markdown_files[@]}"; do
     exit 1
   fi
 
-  if [[ "${first_non_empty_line}" != \#* ]]; then
+  if [[ "${first_non_empty_line}" != "#"* ]]; then
     echo "Markdown file must start with a heading: ${file}" >&2
     exit 1
   fi
