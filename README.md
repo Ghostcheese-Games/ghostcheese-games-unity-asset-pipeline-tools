@@ -76,6 +76,17 @@ See `docs/game-repo-consumption-model.md`.
 
 See `docs/supported-pipelines.md`.
 
+## Shared manifest/schema foundation
+
+The initial shared manifest/schema foundation is defined for cross-pipeline tooling adoption:
+
+- schema: `schemas/pipeline/shared-manifest.foundation.schema.json`
+- design doc: `docs/shared-manifest-schema-foundation.md`
+- examples: `examples/pipeline-packages/shared-manifest.*.example.json`
+- validation fixtures: `fixtures/validation/shared-manifest/`
+
+This foundation separates strict `common` shared manifest concepts from `pipeline` extension payloads so future family-specific validators can evolve independently.
+
 ## Development notes
 
 This scaffold is implementation-agnostic so the repo can host tooling in different languages over time.

@@ -1,0 +1,27 @@
+{
+  "manifestSchemaVersion": "1.0.0",
+  "manifestKind": "gcg.asset-pipeline.manifest",
+  "common": {
+    "manifestId": "fixture.invalid.unknown-family.v1",
+    "displayName": "Fixture Invalid Unknown Family",
+    "governanceScope": "shared-cross-game",
+    "source": {
+      "repository": "Ghostcheese-Games/example",
+      "relativeRoot": "Assets/Unknown"
+    },
+    "assets": [
+      {
+        "assetId": "unknown-asset",
+        "path": "Unknown/asset.bin",
+        "kind": "binary"
+      }
+    ]
+  },
+  "pipeline": {
+    "family": "unknown-family",
+    "familySchemaVersion": "1.0.0",
+    "payload": {
+      "raw": true
+    }
+  }
+}
