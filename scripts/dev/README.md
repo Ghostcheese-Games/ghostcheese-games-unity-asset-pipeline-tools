@@ -1,3 +1,5 @@
 # scripts/dev/
 
-Reserved for local developer workflow scripts.
+Local developer workflow scripts.
+
+- `validate.sh` — lightweight repo validation baseline used locally and in CI

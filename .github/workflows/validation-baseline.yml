@@ -1,0 +1,17 @@
+name: Validation Baseline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run lightweight validation baseline
+        run: bash scripts/dev/validate.sh
