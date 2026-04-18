@@ -67,11 +67,11 @@ def validate_package(package_root: Path, manifest_name: str) -> tuple[list[str],
     if not _require_non_empty_string(manifest_name):
         errors.append("manifest-name must be a non-empty string.")
         return errors, info
-    if Path(manifest_name).name != manifest_name:
-        errors.append("manifest-name must not contain directory components or path separators.")
-        return errors, info
     if not _is_safe_relative_path(manifest_name):
         errors.append(f"manifest-name must be a safe relative path: {manifest_name!r}.")
+        return errors, info
+    if Path(manifest_name).name != manifest_name:
+        errors.append("manifest-name must not contain directory components or path separators.")
         return errors, info
 
     within_root, reason = _path_stays_within_package_root(package_root, manifest_name)
