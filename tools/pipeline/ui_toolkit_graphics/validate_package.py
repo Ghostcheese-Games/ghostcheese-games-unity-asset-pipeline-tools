@@ -352,7 +352,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     if sys.version_info < (3, 10):
-        print("Python 3.10+ is required.")
+        print("Python 3.10+ is required.", file=sys.stderr)
         return 1
 
     args = parse_args()
