@@ -85,6 +85,27 @@ The initial shared manifest/schema foundation is defined for cross-pipeline tool
 - examples: `examples/pipeline-packages/shared-manifest.*.example.json`
 - validation fixtures: `fixtures/validation/shared-manifest/`
 
+## First real tool slice: UI Toolkit graphics package validator
+
+This repository now includes a first end-to-end validator slice for Unity UI Toolkit graphic asset packages:
+
+- validator entrypoint: `tools/pipeline/ui_toolkit_graphics/validate_package.py`
+- integration test matrix: `tests/integration/ui-toolkit-graphics-package-validator/cases.json`
+- package fixtures: `fixtures/validation/ui-toolkit-graphics-package/`
+
+Run directly:
+
+```bash
+python3 tools/pipeline/ui_toolkit_graphics/validate_package.py \
+  --package-root fixtures/validation/ui-toolkit-graphics-package/valid/minimal-package
+```
+
+Run repository validation (includes validator integration tests):
+
+```bash
+bash scripts/dev/validate.sh
+```
+
 This foundation separates strict `common` shared manifest concepts from `pipeline` extension payloads so future family-specific validators can evolve independently.
 
 ## Development notes

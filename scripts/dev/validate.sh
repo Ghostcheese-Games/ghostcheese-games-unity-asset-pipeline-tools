@@ -64,4 +64,6 @@ while IFS= read -r -d '' script; do
   bash -n "${script}"
 done < <(find scripts -type f -name "*.sh" -print0)
 
+python3 tests/integration/ui-toolkit-graphics-package-validator/test_validator.py
+
 echo "Validation passed."

@@ -11,3 +11,4 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Initial repository scaffold for shared Ghostcheese Games Unity asset-pipeline tooling.
 - Initial shared manifest/schema foundation added with canonical schema, examples, fixtures, and test-case matrix artifacts.
+- First real validator slice for Unity UI Toolkit graphic asset packages, including CLI validator, fixtures, integration tests, and baseline validation integration.

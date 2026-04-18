@@ -1,0 +1,29 @@
+{
+  "manifestSchemaVersion": "1.0.0",
+  "manifestKind": "gcg.asset-pipeline.manifest",
+  "common": {
+    "manifestId": "fixture.ui-toolkit.package.missing-file.v1",
+    "displayName": "Fixture UI Toolkit Package Missing File",
+    "governanceScope": "shared-cross-game",
+    "source": {
+      "repository": "Ghostcheese-Games/example",
+      "relativeRoot": "Assets/UI/MainMenu"
+    },
+    "assets": [
+      {
+        "assetId": "main-menu-layout",
+        "path": "Layout/MainMenu.uxml",
+        "kind": "ui-layout"
+      }
+    ]
+  },
+  "pipeline": {
+    "family": "ui-toolkit-graphics",
+    "familySchemaVersion": "1.0.0",
+    "payload": {
+      "visualTreeAssets": [
+        "Layout/MainMenu.uxml"
+      ]
+    }
+  }
+}

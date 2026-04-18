@@ -2,4 +2,4 @@
 
 Local developer workflow scripts.
 
-- `validate.sh` — lightweight repo validation baseline used locally and in CI
+- `validate.sh` — repo validation baseline used locally and in CI (includes UI Toolkit graphics package validator integration checks)

@@ -8,3 +8,4 @@
 - [supported-pipelines.md](./supported-pipelines.md)
 - [dependencies.md](./dependencies.md)
 - [validation-baseline.md](./validation-baseline.md)
+- [ui-toolkit-graphics-package-validator.md](./ui-toolkit-graphics-package-validator.md)

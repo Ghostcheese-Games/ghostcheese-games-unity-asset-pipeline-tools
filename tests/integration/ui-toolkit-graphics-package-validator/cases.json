@@ -1,0 +1,23 @@
+{
+  "validator": "tools/pipeline/ui_toolkit_graphics/validate_package.py",
+  "cases": [
+    {
+      "name": "valid-minimal-package",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/valid/minimal-package",
+      "expectValid": true,
+      "expectedOutputContains": "Validation passed"
+    },
+    {
+      "name": "invalid-missing-visual-tree-file",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/missing-visual-tree-file",
+      "expectValid": false,
+      "expectedOutputContains": "Asset file listed in common.assets is missing"
+    },
+    {
+      "name": "invalid-wrong-family",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/invalid/wrong-family",
+      "expectValid": false,
+      "expectedOutputContains": "pipeline.family must be 'ui-toolkit-graphics'"
+    }
+  ]
+}
