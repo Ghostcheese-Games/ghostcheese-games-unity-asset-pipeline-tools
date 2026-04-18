@@ -42,7 +42,14 @@
       "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/valid/minimal-package",
       "manifestName": "../manifest.json",
       "expectValid": false,
-      "expectedOutputContains": "manifest-name must be a file name without path separators."
+      "expectedOutputContains": "manifest-name must not contain directory components or path separators."
+    },
+    {
+      "name": "invalid-manifest-name-empty",
+      "packageRoot": "fixtures/validation/ui-toolkit-graphics-package/valid/minimal-package",
+      "manifestName": "",
+      "expectValid": false,
+      "expectedOutputContains": "manifest-name must be a non-empty string."
     }
   ]
 }
