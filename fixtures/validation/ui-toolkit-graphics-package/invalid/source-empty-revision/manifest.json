@@ -3,7 +3,7 @@
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
     "manifestId": "fixture.ui-toolkit.package.source-empty-revision.v1",
-    "displayName": "Fixture UI Toolkit Package Valid",
+    "displayName": "Fixture UI Toolkit Package Invalid Source Empty Revision",
     "governanceScope": "shared-cross-game",
     "source": {
       "repository": "Ghostcheese-Games/example",
