@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ghostcheese.games/schemas/pipeline/shared-manifest.foundation.schema.json",
+  "title": "Ghostcheese Games Shared Asset-Pipeline Manifest (Foundation v1)",
+  "description": "Shared foundation contract for Ghostcheese Games asset-pipeline tooling. Pipeline families extend this contract via pipeline.payload.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifestSchemaVersion",
+    "manifestKind",
+    "common",
+    "pipeline"
+  ],
+  "properties": {
+    "manifestSchemaVersion": {
+      "const": "1.0.0"
+    },
+    "manifestKind": {
+      "const": "gcg.asset-pipeline.manifest"
+    },
+    "common": {
+      "$ref": "#/$defs/commonManifest"
+    },
+    "pipeline": {
+      "$ref": "#/$defs/pipelineExtensionPoint"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+    },
+    "commonManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifestId",
+        "displayName",
+        "governanceScope",
+        "source",
+        "assets"
+      ],
+      "properties": {
+        "manifestId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "governanceScope": {
+          "type": "string",
+          "enum": [
+            "shared-cross-game",
+            "shared-studio-governed"
+          ]
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "relativeRoot"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            },
+            "relativeRoot": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "assets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/assetEntry"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "lifecycle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "active",
+                "deprecated"
+              ]
+            },
+            "createdUtc": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedUtc": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "assetEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetId",
+        "path",
+        "kind"
+      ],
+      "properties": {
+        "assetId": {
+          "$ref": "#/$defs/identifier"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "locale": {
+          "type": "string",
+          "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$"
+        },
+        "checksumSha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      }
+    },
+    "pipelineExtensionPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family",
+        "familySchemaVersion",
+        "payload"
+      ],
+      "properties": {
+        "family": {
+          "type": "string",
+          "enum": [
+            "ui-toolkit-graphics",
+            "sprites-2d",
+            "models-3d",
+            "textures-materials",
+            "animation",
+            "sound-effects",
+            "music",
+            "voice-over",
+            "vfx-particle-screen-effects",
+            "font-localized-text-presentation"
+          ]
+        },
+        "familySchemaVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "payload": {
+          "type": "object",
+          "minProperties": 1,
+          "description": "Pipeline-family extension payload. Family-specific schema(s) validate this content in future iterations.",
+          "additionalProperties": true
+        },
+        "validationProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      }
+    }
+  }
+}

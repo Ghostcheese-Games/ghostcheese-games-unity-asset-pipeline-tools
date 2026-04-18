@@ -1,0 +1,29 @@
+{
+  "schema": "schemas/pipeline/shared-manifest.foundation.schema.json",
+  "cases": [
+    {
+      "name": "valid-ui-toolkit",
+      "fixture": "fixtures/validation/shared-manifest/valid/ui-toolkit.valid.json",
+      "expectValid": true
+    },
+    {
+      "name": "invalid-missing-common-manifest-id",
+      "fixture": "fixtures/validation/shared-manifest/invalid/missing-common.manifest-id.json",
+      "expectValid": false,
+      "expectedFailure": {
+        "instancePath": "/common",
+        "keyword": "required",
+        "missingProperty": "manifestId"
+      }
+    },
+    {
+      "name": "invalid-unknown-pipeline-family",
+      "fixture": "fixtures/validation/shared-manifest/invalid/unknown-family.json",
+      "expectValid": false,
+      "expectedFailure": {
+        "instancePath": "/pipeline/family",
+        "keyword": "enum"
+      }
+    }
+  ]
+}

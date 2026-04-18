@@ -1,0 +1,43 @@
+{
+  "manifestSchemaVersion": "1.0.0",
+  "manifestKind": "gcg.asset-pipeline.manifest",
+  "common": {
+    "manifestId": "gcg.audio.sfx.ui.v1",
+    "displayName": "UI Sound Effects Bundle",
+    "governanceScope": "shared-studio-governed",
+    "source": {
+      "repository": "Ghostcheese-Games/ghostcheese-games-audio-assets",
+      "revision": "d4c3b2a1",
+      "relativeRoot": "packages/audio/ui-sfx"
+    },
+    "assets": [
+      {
+        "assetId": "ui-confirm-sfx",
+        "path": "SFX/ui-confirm.wav",
+        "kind": "audio-clip"
+      },
+      {
+        "assetId": "ui-cancel-sfx",
+        "path": "SFX/ui-cancel.wav",
+        "kind": "audio-clip"
+      }
+    ],
+    "tags": [
+      "shared",
+      "audio",
+      "ui"
+    ],
+    "lifecycle": {
+      "status": "active"
+    }
+  },
+  "pipeline": {
+    "family": "sound-effects",
+    "familySchemaVersion": "1.0.0",
+    "payload": {
+      "defaultMixerGroup": "UI",
+      "normalizationTargetLufs": -16,
+      "loopingAssets": []
+    }
+  }
+}

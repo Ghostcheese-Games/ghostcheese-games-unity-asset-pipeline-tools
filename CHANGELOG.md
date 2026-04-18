@@ -10,3 +10,4 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### Added
 
 - Initial repository scaffold for shared Ghostcheese Games Unity asset-pipeline tooling.
+- Initial shared manifest/schema foundation added with canonical schema, examples, fixtures, and test-case matrix artifacts.

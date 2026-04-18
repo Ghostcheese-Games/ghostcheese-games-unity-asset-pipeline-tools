@@ -1,0 +1,58 @@
+{
+  "manifestSchemaVersion": "1.0.0",
+  "manifestKind": "gcg.asset-pipeline.manifest",
+  "common": {
+    "manifestId": "gcg.ui-kit.main-menu.v1",
+    "displayName": "UI Toolkit Main Menu Graphics",
+    "description": "Shared menu skin package consumed by multiple Ghostcheese Games titles.",
+    "governanceScope": "shared-cross-game",
+    "source": {
+      "repository": "Ghostcheese-Games/ghostcheese-games-ui-assets",
+      "revision": "a1b2c3d4",
+      "relativeRoot": "packages/ui/main-menu"
+    },
+    "assets": [
+      {
+        "assetId": "main-menu-uss",
+        "path": "Styles/MainMenu.uss",
+        "kind": "ui-stylesheet"
+      },
+      {
+        "assetId": "main-menu-bg-en-us",
+        "path": "Textures/main-menu-bg-en-us.png",
+        "kind": "texture-2d",
+        "locale": "en-US"
+      }
+    ],
+    "tags": [
+      "shared",
+      "ui",
+      "menu"
+    ],
+    "lifecycle": {
+      "status": "active",
+      "createdUtc": "2026-04-18T00:00:00Z",
+      "updatedUtc": "2026-04-18T00:00:00Z"
+    }
+  },
+  "pipeline": {
+    "family": "ui-toolkit-graphics",
+    "familySchemaVersion": "1.0.0",
+    "validationProfiles": [
+      "default",
+      "localization-aware"
+    ],
+    "payload": {
+      "styleSheets": [
+        "Styles/MainMenu.uss"
+      ],
+      "visualTreeAssets": [
+        "Layout/MainMenu.uxml"
+      ],
+      "texturePacking": {
+        "atlasName": "main-menu",
+        "maxSize": 2048
+      }
+    }
+  }
+}

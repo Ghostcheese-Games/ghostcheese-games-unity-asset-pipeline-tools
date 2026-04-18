@@ -1,3 +1,5 @@
 # tests/unit/
 
-Reserved for unit tests of shared tooling components.
+Unit tests and test artifacts for shared tooling components.
+
+- `shared-manifest-schema/` contains schema-foundation validation cases for future validator implementations.
