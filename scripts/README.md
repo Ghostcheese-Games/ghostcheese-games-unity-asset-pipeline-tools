@@ -2,5 +2,6 @@
 
 Automation scripts for development and release workflows.
 
+- `validate-repo-structure.sh` canonical top-level validation baseline entrypoint
 - `dev/` for local development automation
 - `release/` for release preparation automation
