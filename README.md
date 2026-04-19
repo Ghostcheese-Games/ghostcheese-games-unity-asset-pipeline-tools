@@ -105,7 +105,7 @@ python3 tools/pipeline/ui_toolkit_graphics/validate_package.py \
 Run repository validation (includes validator integration tests):
 
 ```bash
-bash scripts/dev/validate.sh
+./scripts/validate-repo-structure.sh
 ```
 
 This foundation separates strict `common` shared manifest concepts from `pipeline` extension payloads so future family-specific validators can evolve independently.
@@ -126,7 +126,7 @@ This repo includes a lightweight validation baseline that is intentionally imple
 Run locally:
 
 ```bash
-bash scripts/dev/validate.sh
+./scripts/validate-repo-structure.sh
 ```
 
 Current baseline checks:
@@ -143,4 +143,6 @@ CI:
 - runs on pull requests and pushes to `main`
 - executes the same local baseline script
 
-Future tool-specific validation should plug in by extending `scripts/dev/validate.sh` and, if needed, adding toolchain-specific jobs/workflows while keeping this baseline as the common floor.
+`scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint and delegates to `scripts/dev/validate.sh` for the repo-specific implementation flow.
+
+Future tool-specific validation should plug in by extending `scripts/dev/validate.sh` and, if needed, adding toolchain-specific jobs/workflows while keeping the top-level baseline entrypoint stable.

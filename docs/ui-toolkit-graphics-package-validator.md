@@ -42,7 +42,7 @@ The command prints human-readable validation messages and exits with:
 Run repository validation baseline (includes validator integration tests):
 
 ```bash
-bash scripts/dev/validate.sh
+./scripts/validate-repo-structure.sh
 ```
 
 ## Fixtures and integration tests
@@ -56,4 +56,3 @@ bash scripts/dev/validate.sh
 In game repositories or production handoff automation, use thin wrappers that call this shared validator and pass game-local package roots/config.
 
 This preserves the shared-governed validation logic in this repository and aligns with the documented game-repo consumption model.
-

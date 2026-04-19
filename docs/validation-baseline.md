@@ -7,7 +7,7 @@ This repository keeps a lightweight, implementation-agnostic validation floor.
 Run:
 
 ```bash
-bash scripts/dev/validate.sh
+./scripts/validate-repo-structure.sh
 ```
 
 The script validates:
@@ -16,6 +16,11 @@ The script validates:
 - markdown file sanity (non-empty and heading-first)
 - shell script syntax under `scripts/`
 - UI Toolkit graphics package validator integration cases
+
+Implementation note:
+
+- `scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint
+- it delegates to `scripts/dev/validate.sh` for repo-specific validation implementation
 
 ## CI validation
 
