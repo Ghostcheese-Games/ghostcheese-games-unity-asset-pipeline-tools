@@ -1,4 +1,4 @@
-# Validation Baseline
+# Repository Validation
 
 This repository keeps a lightweight, implementation-agnostic validation floor.
 
@@ -14,17 +14,17 @@ The script validates:
 
 - required scaffold paths and area README files
 - markdown file sanity (non-empty and heading-first)
-- shell script syntax under `scripts/`
+- shell script syntax under `scripts/` and `tools/validation/`
 - UI Toolkit graphics package validator integration cases
 
 Implementation note:
 
 - `scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint
-- it delegates to `scripts/dev/validate.sh` for repo-specific validation implementation
+- it delegates to `tools/validation/validate.sh` for repo-specific validation implementation
 
 ## CI validation
 
-Workflow: `.github/workflows/validation-baseline.yml`
+Workflow: `.github/workflows/repository-validation.yml`
 
 - triggers on pull requests and pushes to `main`
 - executes the same script used locally

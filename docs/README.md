@@ -7,5 +7,5 @@
 - [release-and-versioning.md](./release-and-versioning.md)
 - [supported-pipelines.md](./supported-pipelines.md)
 - [dependencies.md](./dependencies.md)
-- [validation-baseline.md](./validation-baseline.md)
+- [repository-validation.md](./repository-validation.md)
 - [ui-toolkit-graphics-package-validator.md](./ui-toolkit-graphics-package-validator.md)

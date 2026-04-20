@@ -2,4 +2,4 @@
 
 Local developer workflow scripts.
 
-- `validate.sh` — repo-specific validation implementation used by `../validate-repo-structure.sh` (includes UI Toolkit graphics package validator integration checks)
+Repository-validation implementation now lives under `../../tools/validation/`.

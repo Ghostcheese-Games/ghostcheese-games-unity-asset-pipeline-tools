@@ -1,4 +1,4 @@
-name: Validation Baseline
+name: Repository Validation
 
 on:
   pull_request:
