@@ -60,6 +60,7 @@ See `docs/game-repo-consumption-model.md`.
 - `fixtures/` — deterministic sample inputs/outputs for tests
 - `tests/` — unit and integration test suites
 - `scripts/` — development and release automation scripts
+- `tools/validation/` — repo-validation implementation invoked by the canonical wrapper
 
 ## Supported pipeline domains
 
@@ -134,15 +135,15 @@ Current baseline checks:
 - expected scaffold directories/files are present
 - required area `README.md` files exist
 - markdown files are non-empty and start with a heading
-- shell scripts under `scripts/` are syntax-checked with `bash -n`
+- shell scripts under `scripts/` and `tools/validation/` are syntax-checked with `bash -n`
 - UI Toolkit graphics package validator integration matrix runs via `python3` (Python 3.10+)
 
 CI:
 
-- GitHub Actions workflow: `.github/workflows/validation-baseline.yml`
+- GitHub Actions workflow: `.github/workflows/repository-validation.yml`
 - runs on pull requests and pushes to `main`
 - executes the same local baseline script
 
-`scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint and delegates to `scripts/dev/validate.sh` for the repo-specific implementation flow.
+`scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint and delegates to `tools/validation/validate.sh` for the repo-specific implementation flow.
 
-Future tool-specific validation should plug in by extending `scripts/dev/validate.sh` and, if needed, adding toolchain-specific jobs/workflows while keeping the top-level baseline entrypoint stable.
+Future tool-specific validation should plug in by extending `tools/validation/validate.sh` and, if needed, adding toolchain-specific jobs/workflows while keeping the top-level baseline entrypoint stable.
