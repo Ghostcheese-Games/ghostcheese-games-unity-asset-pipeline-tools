@@ -20,7 +20,7 @@ The script validates:
 Implementation note:
 
 - `scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint
-- it delegates to `tools/validation/validate.sh` for repo-specific validation implementation
+- it delegates to `tools/validation/validate-repo-structure.sh` for repo-specific validation implementation
 
 ## CI validation
 
