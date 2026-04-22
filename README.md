@@ -135,7 +135,10 @@ Current baseline checks:
 - expected scaffold directories/files are present
 - required area `README.md` files exist
 - markdown files are non-empty and start with a heading
+  - when git metadata is unavailable (for example extracted zip review), markdown checks fall back to filesystem discovery with an explicit degraded-mode message
+- generated Python/tooling artifacts are not present in repository tree (`__pycache__/`, `*.pyc`, `.pytest_cache/`)
 - shell scripts under `scripts/` and `tools/validation/` are syntax-checked with `bash -n`
+- shared-manifest/schema fixture matrix runs via `python3 tests/unit/shared-manifest-schema/test_cases.py`
 - UI Toolkit graphics package validator integration matrix runs via `python3` (Python 3.10+)
 
 CI:
