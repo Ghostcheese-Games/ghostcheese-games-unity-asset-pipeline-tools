@@ -50,6 +50,8 @@ def _validate_manifest(manifest: dict[str, Any], schema: dict[str, Any]) -> list
 
     pipeline = manifest.get("pipeline")
     if isinstance(pipeline, dict):
+        pipeline_required = schema.get("$defs", {}).get("pipelineExtensionPoint", {}).get("required", [])
+        errors.extend(_validate_required(pipeline, pipeline_required, "/pipeline"))
         family_enum = (
             schema.get("$defs", {})
             .get("pipelineExtensionPoint", {})
