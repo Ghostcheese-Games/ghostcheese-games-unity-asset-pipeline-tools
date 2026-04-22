@@ -17,6 +17,7 @@ This repository follows governance in `Ghostcheese-Games/.github`, including:
 - shared asset-pipeline tooling bootstrap governance
 - localization-aware asset pipeline governance
 - org-wide AI/agent workflow standards
+- centralized reusable pattern governance/indexing
 
 Primary references:
 
@@ -26,6 +27,9 @@ Primary references:
 - `https://github.com/Ghostcheese-Games/.github/blob/main/docs/governance/unity-localization-governance.md`
 - `https://github.com/Ghostcheese-Games/.github/blob/main/.github/ai/AI-COLLABORATION-STANDARD.md`
 - `https://github.com/Ghostcheese-Games/.github/blob/main/.github/ai/ISSUE-EXECUTION-STANDARD.md`
+- `https://github.com/Ghostcheese-Games/.github/blob/main/docs/patterns/index.md`
+
+Local pattern reference layer for this repository: `docs/pattern-index.md`.
 
 ## Scope and boundaries
 
