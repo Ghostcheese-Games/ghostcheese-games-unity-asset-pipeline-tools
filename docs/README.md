@@ -1,6 +1,7 @@
 # Documentation Index
 
 - [tooling-overview.md](./tooling-overview.md)
+- [pattern-index.md](./pattern-index.md)
 - [shared-manifest-schema-foundation.md](./shared-manifest-schema-foundation.md)
 - [repo-scope-and-boundaries.md](./repo-scope-and-boundaries.md)
 - [game-repo-consumption-model.md](./game-repo-consumption-model.md)
