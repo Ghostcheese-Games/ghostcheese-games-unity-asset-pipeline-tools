@@ -13,6 +13,11 @@ Thumbs.db
 tmp/
 temp/
 
+# Python / test artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+
 # Common build artifacts
 build/
 dist/
