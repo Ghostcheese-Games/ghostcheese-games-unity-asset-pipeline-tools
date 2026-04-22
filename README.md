@@ -29,7 +29,7 @@ Primary references:
 - `https://github.com/Ghostcheese-Games/.github/blob/main/.github/ai/ISSUE-EXECUTION-STANDARD.md`
 - `https://github.com/Ghostcheese-Games/.github/blob/main/docs/patterns/index.md`
 
-Local pattern reference layer for this repository: `docs/pattern-index.md`.
+Local pattern reference layer for this repository: `docs/patterns/README.md`.
 
 ## Scope and boundaries
 
