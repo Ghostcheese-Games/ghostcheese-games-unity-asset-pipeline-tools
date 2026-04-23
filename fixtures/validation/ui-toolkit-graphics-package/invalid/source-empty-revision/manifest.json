@@ -2,7 +2,7 @@
   "manifestSchemaVersion": "1.0.0",
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
-    "manifestId": "fixture.ui-toolkit.package.source-empty-revision.v1",
+    "manifestId": "fixture.ui-toolkit.package.source-empty-revision",
     "displayName": "Fixture UI Toolkit Package Invalid Source Empty Revision",
     "governanceScope": "shared-cross-game",
     "source": {

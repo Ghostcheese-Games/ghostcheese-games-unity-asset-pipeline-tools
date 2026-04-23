@@ -2,7 +2,7 @@
   "manifestSchemaVersion": "1.0.0",
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
-    "manifestId": "fixture.ui-toolkit.package.source-missing.v1",
+    "manifestId": "fixture.ui-toolkit.package.source-missing",
     "displayName": "Fixture UI Toolkit Package Source Missing",
     "governanceScope": "shared-cross-game",
     "source": {},

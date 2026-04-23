@@ -2,7 +2,7 @@
   "manifestSchemaVersion": "1.0.0",
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
-    "manifestId": "gcg.audio.sfx.ui.v1",
+    "manifestId": "gcg.audio-ui-sfx",
     "displayName": "UI Sound Effects Bundle",
     "governanceScope": "shared-studio-governed",
     "source": {

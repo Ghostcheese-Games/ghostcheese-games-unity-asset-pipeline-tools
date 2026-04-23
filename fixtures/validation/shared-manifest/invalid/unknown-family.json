@@ -2,7 +2,7 @@
   "manifestSchemaVersion": "1.0.0",
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
-    "manifestId": "fixture.invalid.unknown-family.v1",
+    "manifestId": "fixture.invalid.unknown-family",
     "displayName": "Fixture Invalid Unknown Family",
     "governanceScope": "shared-cross-game",
     "source": {
