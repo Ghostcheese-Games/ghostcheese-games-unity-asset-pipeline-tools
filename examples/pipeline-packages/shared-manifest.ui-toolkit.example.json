@@ -2,7 +2,7 @@
   "manifestSchemaVersion": "1.0.0",
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
-    "manifestId": "gcg.ui-toolkit.main-menu",
+    "manifestId": "gcg.ui-kit.main-menu",
     "displayName": "UI Toolkit Main Menu Graphics",
     "description": "Shared menu skin package consumed by multiple Ghostcheese Games titles.",
     "governanceScope": "shared-cross-game",
