@@ -3,4 +3,4 @@ set -euo pipefail
 
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 
-exec bash "${repo_root}/tools/validation/validate-repo-structure.sh" "$@"
+exec bash -- "${repo_root}/tools/validation/validate-repo-structure.sh" "$@"
