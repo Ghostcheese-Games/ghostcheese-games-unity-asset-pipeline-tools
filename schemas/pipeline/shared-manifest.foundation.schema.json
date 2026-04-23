@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ghostcheese.games/schemas/pipeline/shared-manifest.foundation.schema.json",
-  "title": "Ghostcheese Games Shared Asset-Pipeline Manifest (Foundation v1)",
+  "title": "Ghostcheese Games Shared Asset-Pipeline Manifest (Foundation)",
   "description": "Shared foundation contract for Ghostcheese Games asset-pipeline tooling. Pipeline families extend this contract via pipeline.payload.",
   "type": "object",
   "additionalProperties": false,

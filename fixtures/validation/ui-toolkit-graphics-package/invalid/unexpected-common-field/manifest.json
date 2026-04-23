@@ -2,7 +2,7 @@
   "manifestSchemaVersion": "1.0.0",
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
-    "manifestId": "fixture.ui-toolkit.package.unexpected-common-field.v1",
+    "manifestId": "fixture.ui-toolkit.package.unexpected-common-field",
     "displayName": "Fixture UI Toolkit Package Valid",
     "governanceScope": "shared-cross-game",
     "source": {

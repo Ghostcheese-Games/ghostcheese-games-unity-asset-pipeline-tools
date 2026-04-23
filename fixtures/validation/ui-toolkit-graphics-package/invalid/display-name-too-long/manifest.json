@@ -2,7 +2,7 @@
   "manifestSchemaVersion": "1.0.0",
   "manifestKind": "gcg.asset-pipeline.manifest",
   "common": {
-    "manifestId": "fixture.ui-toolkit.package.display-name-too-long.v1",
+    "manifestId": "fixture.ui-toolkit.package.display-name-too-long",
     "displayName": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
     "governanceScope": "shared-cross-game",
     "source": {

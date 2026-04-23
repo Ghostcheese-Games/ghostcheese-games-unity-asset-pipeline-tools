@@ -1,4 +1,4 @@
-# Shared Manifest/Schema Foundation (v1)
+# Shared Manifest/Schema Foundation
 
 This document defines the initial shared manifest/schema foundation for Ghostcheese Games asset-pipeline tooling.
 
@@ -6,7 +6,7 @@ This document defines the initial shared manifest/schema foundation for Ghostche
 
 - establish one shared manifest contract for cross-game tooling
 - separate common/shared concepts from pipeline-family extensions
-- keep v1 practical and incremental so validators/importers can adopt it quickly
+- keep the foundation practical and incremental so validators/importers can adopt it quickly
 
 ## Canonical schema artifact
 
@@ -39,7 +39,7 @@ The `pipeline` section is the extension boundary.
 - `pipeline.familySchemaVersion` versions the family contract independently
 - `pipeline.payload` carries family-specific fields
 
-In v1, `pipeline.payload` is intentionally open for incremental adoption. Future issues can add family-specific schemas that validate `payload` per `family`.
+In this foundation, `pipeline.payload` is intentionally open for incremental adoption. Future issues can add family-specific schemas that validate `payload` per `family`.
 
 ## Example usage
 
