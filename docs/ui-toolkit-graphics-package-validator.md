@@ -1,6 +1,6 @@
 # UI Toolkit Graphics Package Validator
 
-This document describes the first production tool slice in this repository: validating Unity UI Toolkit graphic asset packages against the shared manifest/schema foundation and package structure expectations.
+This document describes the UI Toolkit graphics package validator: validating Unity UI Toolkit graphic asset packages against the shared manifest/schema foundation and package structure expectations.
 
 ## Validator entrypoint
 
