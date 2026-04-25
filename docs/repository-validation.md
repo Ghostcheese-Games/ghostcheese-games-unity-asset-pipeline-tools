@@ -7,20 +7,19 @@ This repository keeps a lightweight, implementation-agnostic validation floor.
 Run:
 
 ```bash
-./scripts/validate-repo-structure.sh
+./tools/validation/validate-repo-structure.sh
 ```
 
 The script validates:
 
 - required scaffold paths and area README files
 - markdown file sanity (non-empty and heading-first)
-- shell script syntax under `scripts/` and `tools/validation/`
+- shell script syntax under `tools/validation/`
 - UI Toolkit graphics package validator integration cases
 
 Implementation note:
 
-- `scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint
-- it delegates to `tools/validation/validate-repo-structure.sh` for repo-specific validation implementation
+- `tools/validation/validate-repo-structure.sh` is the canonical validation entrypoint
 
 ## CI validation
 

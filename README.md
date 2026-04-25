@@ -63,8 +63,8 @@ See `docs/game-repo-consumption-model.md`.
 - `examples/` — reference usage for consumers
 - `fixtures/` — deterministic sample inputs/outputs for tests
 - `tests/` — unit and integration test suites
-- `scripts/` — development and release automation scripts
-- `tools/validation/` — repo-validation implementation invoked by the canonical wrapper
+- `scripts/` — release preparation automation scripts
+- `tools/validation/` — repo-validation implementation (canonical entrypoint)
 
 ## Supported pipeline domains
 
@@ -110,7 +110,7 @@ python3 tools/pipeline/ui_toolkit_graphics/validate_package.py \
 Run repository validation (includes validator integration tests):
 
 ```bash
-./scripts/validate-repo-structure.sh
+./tools/validation/validate-repo-structure.sh
 ```
 
 This foundation separates strict `common` shared manifest concepts from `pipeline` extension payloads so future family-specific validators can evolve independently.
@@ -131,7 +131,7 @@ This repo includes a lightweight validation baseline that is intentionally imple
 Run locally:
 
 ```bash
-./scripts/validate-repo-structure.sh
+./tools/validation/validate-repo-structure.sh
 ```
 
 Current baseline checks:
@@ -141,7 +141,7 @@ Current baseline checks:
 - markdown files are non-empty and start with a heading
   - when git metadata is unavailable (for example extracted zip review), markdown checks fall back to filesystem discovery with an explicit degraded-mode message
 - generated Python/tooling artifacts are not present in repository tree (`__pycache__/`, `*.pyc`, `.pytest_cache/`)
-- shell scripts under `scripts/` and `tools/validation/` are syntax-checked with `bash -n`
+- shell scripts under `tools/validation/` are syntax-checked with `bash -n`
 - shared-manifest/schema fixture matrix runs via `python3 tests/unit/shared-manifest-schema/test_cases.py`
 - UI Toolkit graphics package validator integration matrix runs via `python3` (Python 3.10+)
 
@@ -151,6 +151,6 @@ CI:
 - runs on pull requests and pushes to `main`
 - executes the same local baseline script
 
-`scripts/validate-repo-structure.sh` is the canonical external baseline entrypoint and delegates to `tools/validation/validate-repo-structure.sh` for the repo-specific implementation flow.
+`tools/validation/validate-repo-structure.sh` is the canonical validation entrypoint.
 
-Future tool-specific validation should plug in by extending `tools/validation/validate-repo-structure.sh` and, if needed, adding toolchain-specific jobs/workflows while keeping the top-level baseline entrypoint stable.
+Future tool-specific validation should plug in by extending `tools/validation/validate-repo-structure.sh` and, if needed, adding toolchain-specific jobs/workflows while keeping this baseline entrypoint stable.

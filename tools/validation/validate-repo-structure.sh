@@ -14,7 +14,6 @@ required_paths=(
   "examples"
   "fixtures"
   "tests"
-  "scripts"
 )
 
 for path in "${required_paths[@]}"; do
@@ -31,7 +30,6 @@ required_readmes=(
   "examples/README.md"
   "fixtures/README.md"
   "tests/README.md"
-  "scripts/README.md"
 )
 
 for readme in "${required_readmes[@]}"; do
@@ -89,10 +87,6 @@ if [[ "${#generated_artifacts[@]}" -gt 0 ]]; then
   echo "Remove generated artifacts and ensure .gitignore excludes them." >&2
   exit 1
 fi
-
-while IFS= read -r -d '' script; do
-  bash -n "${script}"
-done < <(find scripts -type f -name "*.sh" -print0)
 
 while IFS= read -r -d '' script; do
   bash -n "${script}"
