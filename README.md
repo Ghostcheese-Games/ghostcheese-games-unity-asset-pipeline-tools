@@ -6,7 +6,7 @@ This repository is the central home for cross-game asset-pipeline tooling infras
 
 ## Repository status
 
-Active tooling foundation with a normalized validation layout, shared schema support, and multiple implemented pipeline validators. Implementation work continues as additional pipeline domains are covered.
+Active tooling foundation with a normalized validation layout, shared schema support, and one implemented pipeline validator. Implementation work continues as additional pipeline domains are covered.
 
 ## Governance alignment
 
