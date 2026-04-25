@@ -6,7 +6,7 @@ This repository is the central home for cross-game asset-pipeline tooling infras
 
 ## Repository status
 
-Bootstrap scaffold complete, with the first production validator slice implemented; broader implementation work continues.
+Active tooling foundation with a normalized validation layout, shared schema support, and one implemented pipeline validator. Implementation work continues as additional pipeline domains are covered.
 
 ## Governance alignment
 
@@ -83,16 +83,16 @@ See `docs/supported-pipelines.md`.
 
 ## Shared manifest/schema foundation
 
-The initial shared manifest/schema foundation is defined for cross-pipeline tooling adoption:
+The shared manifest/schema foundation is defined for cross-pipeline tooling adoption:
 
 - schema: `schemas/pipeline/shared-manifest.foundation.schema.json`
 - design doc: `docs/shared-manifest-schema-foundation.md`
 - examples: `examples/pipeline-packages/shared-manifest.*.example.json`
 - validation fixtures: `fixtures/validation/shared-manifest/`
 
-## First real tool slice: UI Toolkit graphics package validator
+## UI Toolkit graphics package validator
 
-This repository now includes a first end-to-end validator slice for Unity UI Toolkit graphic asset packages:
+The UI Toolkit graphics package validator provides end-to-end validation for Unity UI Toolkit graphic asset packages:
 
 - validator entrypoint: `tools/pipeline/ui_toolkit_graphics/validate_package.py`
 - integration test matrix: `tests/integration/ui-toolkit-graphics-package-validator/cases.json`
@@ -117,11 +117,11 @@ This foundation separates strict `common` shared manifest concepts from `pipelin
 
 ## Development notes
 
-This scaffold is implementation-agnostic so the repo can host tooling in different languages over time.
+This repository is implementation-agnostic so it can host tooling in different languages over time.
 
 Current state:
 
-- first production tooling implementation exists (UI Toolkit graphics package validator)
+- UI Toolkit graphics package validator is implemented and integrated
 - no additional language-specific build/test stack configured yet beyond Python-based validator integration
 
 ## Validation baseline
@@ -136,7 +136,7 @@ Run locally:
 
 Current baseline checks:
 
-- expected scaffold directories/files are present
+- expected repo directories/files are present
 - required area `README.md` files exist
 - markdown files are non-empty and start with a heading
   - when git metadata is unavailable (for example extracted zip review), markdown checks fall back to filesystem discovery with an explicit degraded-mode message
