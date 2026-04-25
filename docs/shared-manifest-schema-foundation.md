@@ -1,8 +1,8 @@
 # Shared Manifest/Schema Foundation
 
-This document defines the initial shared manifest/schema foundation for Ghostcheese Games asset-pipeline tooling.
+This document defines the shared manifest/schema foundation for Ghostcheese Games asset-pipeline tooling.
 
-## Goals of this first foundation
+## Foundation goals
 
 - establish one shared manifest contract for cross-game tooling
 - separate common/shared concepts from pipeline-family extensions
@@ -58,4 +58,4 @@ These examples show shared/common metadata plus different `pipeline.payload` sha
 - Case matrix for validators:
   - `tests/unit/shared-manifest-schema/cases.json`
 
-This gives future tooling issues deterministic fixtures and expected outcomes without requiring a specific implementation stack yet.
+This gives tooling a deterministic fixture and expected-outcome baseline without requiring a specific implementation stack.

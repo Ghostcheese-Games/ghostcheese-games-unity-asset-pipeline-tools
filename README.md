@@ -6,7 +6,7 @@ This repository is the central home for cross-game asset-pipeline tooling infras
 
 ## Repository status
 
-Active tooling foundation with a normalized validation layout, shared schema support, and one implemented pipeline validator. Implementation work continues as additional pipeline domains are covered.
+Active tooling foundation with a normalized validation layout, shared schema support, an established pipeline validator, and a test and fixture organization. Implementation work continues as additional pipeline domains are covered.
 
 ## Governance alignment
 
@@ -122,7 +122,7 @@ This repository is implementation-agnostic so it can host tooling in different l
 Current state:
 
 - UI Toolkit graphics package validator is implemented and integrated
-- no additional language-specific build/test stack configured yet beyond Python-based validator integration
+- additional language-specific tooling stacks can be added as new pipeline domains are covered
 
 ## Validation baseline
 
