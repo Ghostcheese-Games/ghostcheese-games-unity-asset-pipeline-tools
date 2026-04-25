@@ -92,11 +92,9 @@ while IFS= read -r -d '' script; do
   bash -n "${script}"
 done < <(find tools/validation -type f -name "*.sh" -print0)
 
-if [[ -d scripts ]]; then
-  while IFS= read -r -d '' script; do
-    bash -n "${script}"
-  done < <(find scripts -type f -name "*.sh" -print0)
-fi
+while IFS= read -r -d '' script; do
+  bash -n "${script}"
+done < <(find tools/release -type f -name "*.sh" -print0)
 
 if ! command -v python3 >/dev/null 2>&1; then
   echo "python3 command not found. Please install Python 3.10+ and retry." >&2
