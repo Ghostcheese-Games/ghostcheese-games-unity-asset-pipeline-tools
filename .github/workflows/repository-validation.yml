@@ -16,4 +16,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run lightweight validation baseline
-        run: ./scripts/validate-repo-structure.sh
+        run: ./tools/validation/validate-repo-structure.sh

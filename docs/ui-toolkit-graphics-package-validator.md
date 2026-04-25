@@ -42,7 +42,7 @@ The command prints human-readable validation messages and exits with:
 Run repository validation baseline (includes validator integration tests):
 
 ```bash
-./scripts/validate-repo-structure.sh
+./tools/validation/validate-repo-structure.sh
 ```
 
 ## Fixtures and integration tests
