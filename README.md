@@ -63,7 +63,7 @@ See `docs/game-repo-consumption-model.md`.
 - `examples/` — reference usage for consumers
 - `fixtures/` — deterministic sample inputs/outputs for tests
 - `tests/` — unit and integration test suites
-- `scripts/` — release preparation automation scripts
+- `scripts/` — release preparation automation scripts (optional; absent in minimal environments)
 - `tools/validation/` — repo-validation implementation (canonical entrypoint)
 
 ## Supported pipeline domains
