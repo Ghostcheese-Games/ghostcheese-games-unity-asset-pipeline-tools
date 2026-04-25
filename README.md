@@ -141,7 +141,7 @@ Current baseline checks:
 - markdown files are non-empty and start with a heading
   - when git metadata is unavailable (for example extracted zip review), markdown checks fall back to filesystem discovery with an explicit degraded-mode message
 - generated Python/tooling artifacts are not present in repository tree (`__pycache__/`, `*.pyc`, `.pytest_cache/`)
-- shell scripts under `tools/validation/` are syntax-checked with `bash -n`; shell scripts under `tools/release/` are also syntax-checked
+- shell scripts under `tools/validation/` are syntax-checked with `bash -n`; shell scripts under `tools/release/` are also syntax-checked when that directory exists
 - shared-manifest/schema fixture matrix runs via `python3 tests/unit/shared-manifest-schema/test_cases.py`
 - UI Toolkit graphics package validator integration matrix runs via `python3` (Python 3.10+)
 
