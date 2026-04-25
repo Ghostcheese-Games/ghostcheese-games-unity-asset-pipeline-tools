@@ -92,10 +92,10 @@ while IFS= read -r -d '' script; do
   bash -n "${script}"
 done < <(find tools/validation -type f -name "*.sh" -print0)
 
-if [[ -d scripts ]]; then
+if [[ -d tools/release ]]; then
   while IFS= read -r -d '' script; do
     bash -n "${script}"
-  done < <(find scripts -type f -name "*.sh" -print0)
+  done < <(find tools/release -type f -name "*.sh" -print0)
 fi
 
 if ! command -v python3 >/dev/null 2>&1; then
